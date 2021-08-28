@@ -49,7 +49,7 @@ body {
   background: whitesmoke;
   position: fixed;
   right: 0;
-  width: 99vw;
+  width: 100%;
   height: 60px;
   z-index: -1;
   border-radius: 5px;
@@ -100,6 +100,16 @@ body {
   bottom: 25px;
   right: 50px;
 }
+.remove-confirmed {
+  background: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  position: fixed;
+  bottom: 25px;
+  right: 50px;
+}
 
 /* Hidden */
 
@@ -116,6 +126,10 @@ body {
   }
 
   .save-confirmed {
+    right: 25px;
+  }
+
+  .remove-confirmed {
     right: 25px;
   }
 

@@ -8,6 +8,7 @@ const resultsNavigation = document.querySelector("#results-navigation");
 const favoritesNavigation = document.querySelector("#favorites-navigation");
 const imagesContainer = document.querySelector(".images-container");
 const saveConfirmed = document.querySelector(".save-confirmed");
+const removeConfirmed = document.querySelector(".remove-confirmed");
 const loader = document.querySelector(".loader");
 
 function showContent(page) {
@@ -120,6 +121,7 @@ function saveFavorite(itemUrl) {
 
       // Show and hide the ADDED popup
       saveConfirmed.hidden = false;
+      console.log("saveConfirmed.hidden :", saveConfirmed.hidden);
       setTimeout(() => {
         saveConfirmed.hidden = true;
       }, 1000);
@@ -137,6 +139,13 @@ function removeFavorite(itemUrl) {
   localStorage.setItem("nasaFavorites", JSON.stringify(favorites));
 
   updateDOM("favorites");
+
+  // Show and hide the REMOVED popup
+  removeConfirmed.hidden = false;
+  console.log("removeConfirmed.hidden :", removeConfirmed.hidden);
+  setTimeout(() => {
+    removeConfirmed.hidden = true;
+  }, 1000);
 }
 
 // On Load
