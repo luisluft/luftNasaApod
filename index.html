@@ -24,14 +24,14 @@
 
                 <!-- Results Navigation -->
                 <span class="navigation-items" id="results-navigation">
-                    <h3 class="clickable">Favorites</h3>
+                    <h3 class="clickable" onclick="updateDOM('favorites')">Favorites</h3>
                     <h3>&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;</h3>
-                    <h3 class="clickable">Load More</h3>
+                    <h3 class="clickable" onclick="getNasaPictures()">Load More</h3>
                 </span>
 
                 <!-- Favorites Navigation -->
                 <span class="navigation-items hidden" id="favorites-navigation">
-                    <h3 class="clickable">Load More NASA images</h3>
+                    <h3 class="clickable" onclick="getNasaPictures()">Load More NASA images</h3>
                 </span>
 
             </div>

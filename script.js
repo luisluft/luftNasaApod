@@ -10,9 +10,22 @@ const imagesContainer = document.querySelector(".images-container");
 const saveConfirmed = document.querySelector(".save-confirmed");
 const loader = document.querySelector(".loader");
 
-function createPictureCards(page) {
-  console.log("page :", page);
+function showContent(page) {
+  window.scrollTo({ top: 0, behavior: "instant" });
 
+  if (page === "results") {
+    resultsNavigation.classList.remove("hidden");
+    favoritesNavigation.classList.add("hidden");
+  }
+  if (page === "favorites") {
+    favoritesNavigation.classList.remove("hidden");
+    resultsNavigation.classList.add("hidden");
+  }
+
+  loader.classList.add("hidden");
+}
+
+function createPictureCards(page) {
   const currentArray = page === "results" ? resultsArray : Object.values(favorites);
   currentArray.forEach((result) => {
     // Card container
@@ -84,13 +97,17 @@ function updateDOM(page) {
 
   imagesContainer.textContent = "";
   createPictureCards(page);
+  showContent(page);
 }
 
 async function getNasaPictures() {
+  // Show loader
+  loader.classList.remove("hidden");
+
   try {
     const response = await fetch(apiUrl);
     resultsArray = await response.json();
-    updateDOM("favorites");
+    updateDOM("results");
   } catch (error) {
     console.log("error :", error);
   }
@@ -100,7 +117,6 @@ function saveFavorite(itemUrl) {
   resultsArray.forEach((item) => {
     if (item.url.includes(itemUrl) && !favorites[itemUrl]) {
       favorites[itemUrl] = item;
-      console.log("favorites :", favorites);
 
       // Show and hide the ADDED popup
       saveConfirmed.hidden = false;
