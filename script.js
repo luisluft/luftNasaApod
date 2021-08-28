@@ -2,6 +2,7 @@ const API_KEY = "yzj10fV3ZLo1UaqfxZpmNSNfYfVgfikPKMc9Zt9p";
 const count = 2;
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=${count}`;
 let resultsArray = [];
+let favorites = {};
 
 const resultsNavigation = document.querySelector("#results-navigation");
 const favoritesNavigation = document.querySelector("#favorites-navigation");
@@ -15,7 +16,6 @@ function updateDOM() {
     // Card container
     const card = document.createElement("div");
     card.classList.add("card");
-    console.log("card :", card);
 
     // Link element
     const link = document.createElement("a");
@@ -43,6 +43,7 @@ function updateDOM() {
     const saveText = document.createElement("p");
     saveText.classList.add("clickable");
     saveText.textContent = "Add to Favorites";
+    saveText.setAttribute("onclick", `saveFavorite('${result.url}')`);
 
     // Card Text
     const cardText = document.createElement("p");
@@ -79,6 +80,24 @@ async function getNasaPictures() {
   } catch (error) {
     console.log("error :", error);
   }
+}
+
+function saveFavorite(itemUrl) {
+  resultsArray.forEach((item) => {
+    if (item.url.includes(itemUrl) && !favorites[itemUrl]) {
+      favorites[itemUrl] = item;
+      console.log("favorites :", favorites);
+
+      // Show and hide the ADDED popup
+      saveConfirmed.hidden = false;
+      setTimeout(() => {
+        saveConfirmed.hidden = true;
+      }, 1000);
+
+      // Save in localStorage
+      localStorage.setItem("nasaFavorites", JSON.stringify(favorites));
+    }
+  });
 }
 
 // On Load
