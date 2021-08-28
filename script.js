@@ -10,9 +10,11 @@ const imagesContainer = document.querySelector(".images-container");
 const saveConfirmed = document.querySelector(".save-confirmed");
 const loader = document.querySelector(".loader");
 
-// AKA updateDOM()
-function updateDOM() {
-  resultsArray.forEach((result) => {
+function createPictureCards(page) {
+  console.log("page :", page);
+
+  const currentArray = page === "results" ? resultsArray : Object.values(favorites);
+  currentArray.forEach((result) => {
     // Card container
     const card = document.createElement("div");
     card.classList.add("card");
@@ -72,11 +74,18 @@ function updateDOM() {
   });
 }
 
+// page = 'favorites' || 'results'
+function updateDOM(page) {
+  if (localStorage.getItem("nasaFavorites")) favorites = JSON.parse(localStorage.getItem("nasaFavorites"));
+
+  createPictureCards(page);
+}
+
 async function getNasaPictures() {
   try {
     const response = await fetch(apiUrl);
     resultsArray = await response.json();
-    updateDOM();
+    updateDOM("favorites");
   } catch (error) {
     console.log("error :", error);
   }
