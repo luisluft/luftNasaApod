@@ -1,5 +1,5 @@
 const API_KEY = "yzj10fV3ZLo1UaqfxZpmNSNfYfVgfikPKMc9Zt9p";
-const count = 2;
+const count = 3;
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=${count}`;
 let resultsArray = [];
 let favorites = {};
@@ -79,7 +79,7 @@ function createPictureCards(page) {
     // Copyright
     const copyright = document.createElement("span");
     // ternary operator short syntax
-    const copyrightResult = result.copyright === undefined ? "" : result.copyright;
+    const copyrightResult = result.copyright === undefined ? "Unknown" : result.copyright;
     copyright.textContent = ` ${copyrightResult}`;
 
     // Append all elements
